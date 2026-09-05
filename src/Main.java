@@ -1,13 +1,57 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
-
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+void deposit(Account ac, double amount){
+    if (ac.deposit(500)){
+        System.out.println("SUCCESS");
+        System.out.println("New balance: ₹"+ac.getBalance());
+    }else{
+        System.out.println("FAILED (Invalid amount)");
     }
+}
+
+void withdraw(Account ac, double amount){
+    if (ac.withdraw(amount)){
+        System.out.println("SUCCESS");
+        System.out.println("New balance: ₹"+ac.getBalance());
+    }else{
+        System.out.println("FAILED (Insufficient balance)");
+    }
+}
+
+void display(Account ac){
+    System.out.println("Account #"+ac.getAccountNumber()+" | "+ac.getName()+" ("+ac.getAge()+") | "+ac.getAccountType()+" | ₹"+ac.getBalance()+" | "+ac.getStatus());
+}
+
+void main() {
+    System.out.println("==================================================");
+    System.out.println("  GLOBAL DIGITAL BANK - ACCOUNT TEST");
+    System.out.println("==================================================");
+    System.out.println(">>> 1. Creating Account");
+    Account ac1 = new Account(1001,"John Doe",25, 1000,"Savings");
+    System.out.println("Account created!");
+    display(ac1);
+
+    System.out.println(">>> 2. Deposit Money");
+    System.out.print("Depositing ₹500.0: ");
+    deposit(ac1,500);
+
+    System.out.print("Depositing ₹-100.0: ");
+    deposit(ac1,-100);
+
+    System.out.println(">>> 3. Withdraw Money");
+    System.out.println("Withdrawing ₹200.0: ");
+    withdraw(ac1, 200);
+
+    System.out.println("Withdrawing ₹2000.0: ");
+    withdraw(ac1, 200);
+
+    System.out.println(">>> 4. Creating Another Account");
+    Account ac2 = new Account(1002,"Jane Smith",30, 2000,"Current");
+    display(ac2);
+
+    System.out.println(">>> 5. All Accounts");
+    display(ac1);
+    display(ac2);
+
+    System.out.println("==================================================");
+    System.out.println("  TEST COMPLETED!");
+    System.out.println("==================================================");
 }
